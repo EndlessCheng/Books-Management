@@ -2,6 +2,7 @@
 
 import Tkinter
 import MySQLdb
+import Manager
 
 class LoginUI(object):
 
@@ -24,16 +25,13 @@ class LoginUI(object):
 	
 	def connectMySQL(self, ev = None):
 		try:
-			manager = MySQLdb.connect(user = self.managerName.get(), passwd = self.password.get())
-			
-			#TODO: 结束当前界面
-			#TODO: 建立新的界面
-			
-			manager.query('create database book_db')
+			manager = MySQLdb.connect(host = 'localhost', user = self.managerName.get(), passwd = self.password.get(), db = 'book_management', charset = 'utf8')
+			self.top.quit() # 为何不消失？
+			Manager.init(manager)
 		except MySQLdb.OperationalError, err:
-			print 'wrong username or password!'
 			#TODO: add label to show username or password error
-			
+			print 'wrong username or password!'
+
 def init():
 	loginUI = LoginUI()
 	Tkinter.mainloop()

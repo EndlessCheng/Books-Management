@@ -1,0 +1,4 @@
+create database book_management CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+create table book(ISBN bigint(13) primary key, bookname varchar(100) not null, authorname varchar(100) not null, 
+publisher varchar(100) not null, publishtime date not null, price double(10,2) unsigned not null) ENGINE = InnoDB default CHARSET = utf8;
