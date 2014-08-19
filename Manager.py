@@ -5,11 +5,13 @@ import MySQLdb
 
 class ManagerUI(object):
 	
-	def __init__(self, _manager):
-		self.manager = _manager
-		self.top = Tkinter.Tk()
+	def __init__(self, top_, manager_):
+		
+		self.top = top_
+		self.manager = manager_
 		
 		# 弄个列表来管理？
+		#注销、标签
 		
 		self.entryWidth = 40
 		
@@ -75,7 +77,7 @@ class ManagerUI(object):
 			self.publisher.set(res[3])
 			self.publishtime.set(res[4])
 			self.price.set(res[5])
-		except: IndexError, err:
+		except IndexError, err:
 			#TODO 未找到该书
 			print u'未找到该书'
 			
@@ -87,8 +89,8 @@ class ManagerUI(object):
 		self.publishtime.set('')
 		self.price.set('')
 		
-def init(manager = None):
-	managerUI = ManagerUI(manager)
+def init(top = None, manager = None):
+	managerUI = ManagerUI(top, manager)
 	Tkinter.mainloop()
 
 if __name__ == '__main__':

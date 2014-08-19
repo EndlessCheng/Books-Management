@@ -26,12 +26,17 @@ class LoginUI(object):
 	def connectMySQL(self, ev = None):
 		try:
 			manager = MySQLdb.connect(host = 'localhost', user = self.managerName.get(), passwd = self.password.get(), db = 'book_management', charset = 'utf8')
-			self.top.quit() # 为何不消失？
-			Manager.init(manager)
+			self.clear()
+			Manager.init(self.top, manager)
 		except MySQLdb.OperationalError, err:
 			#TODO: add label to show username or password error
 			print 'wrong username or password!'
 
+	def clear(self, ev = None):
+		self.managerNameEntry.pack_forget()
+		self.passwordEntry.pack_forget()
+		self.quitButton.pack_forget()
+	
 def init():
 	loginUI = LoginUI()
 	Tkinter.mainloop()
