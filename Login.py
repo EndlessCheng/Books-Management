@@ -1,15 +1,13 @@
 # -*- coding: UTF-8 -*-
 
-import Tkinter
-import MySQLdb
-import Manager
+import Tkinter, MySQLdb, Manager
 
 class LoginUI(object):
 
 	def __init__(self):
 		self.top = Tkinter.Tk()
 		
-		#TODO: add hint label
+		# TODO: add hint label
 		
 		self.managerName = Tkinter.StringVar(self.top)
 		self.managerNameEntry = Tkinter.Entry(self.top, width = 20, textvariable = self.managerName)
@@ -20,7 +18,7 @@ class LoginUI(object):
 		self.passwordEntry.bind('<Return>', self.connectMySQL)
 		self.passwordEntry.pack()
 		
-		self.quitButton = Tkinter.Button(self.top, text = 'EXIT', command = self.top.quit)
+		self.quitButton = Tkinter.Button(self.top, text = '退出', command = self.top.quit)
 		self.quitButton.pack()
 	
 	def connectMySQL(self, ev = None):
@@ -29,7 +27,7 @@ class LoginUI(object):
 			self.clear()
 			Manager.init(self.top, manager)
 		except MySQLdb.OperationalError, err:
-			#TODO: add label to show username or password error
+			# TODO: add label to show username or password error
 			print 'wrong username or password!'
 
 	def clear(self, ev = None):
