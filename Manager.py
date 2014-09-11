@@ -22,8 +22,10 @@ class ManagerUI(object):
 	
 		entryWidth = 40
 		
+		#这6个横着摆？
 		self.ISBN = Tkinter.StringVar(self.top)
 		self.ISBNEntry = Tkinter.Entry(self.top, width = entryWidth, textvariable = self.ISBN)
+		self.ISBNEntry.bind('<Return>', self.getBook)
 		self.ISBNEntry.pack()
 		
 		self.bookname = Tkinter.StringVar(self.top)
@@ -47,6 +49,7 @@ class ManagerUI(object):
 		self.priceEntry.pack()
 		
 		self.bfm = Tkinter.Frame(self.top)
+		# TODO: 按钮加图片（扁平化）
 		self.addBookButton = Tkinter.Button(self.bfm, text = '添加', command = self.addBook)
 		# 可选TODO：撤销刚刚进行的操作
 		self.getBookButton = Tkinter.Button(self.bfm, text = '获取', command = self.getBook)
@@ -67,11 +70,9 @@ class ManagerUI(object):
 		self.model = TableModel(rows = 0, columns = 0) # like HTML
 		self.bookTable = TableCanvas(self.tableFrame, self.model, cellwidth=120, cellbackgr='#e3f698',
                         thefont=('Arial',12), rowheight=22, rowheaderwidth=30, rowselectedcolor='yellow', editable=False) # like CSS
-						#改字体
 		self.bookTable.createTableFrame()
 		
-		self.colnames = ('ISBN', 'bookname', 'authorname', 'publisher', 'publishtime', 'price')
-		#TODO: 换成中文
+		self.colnames = ('ISBN', '书名', '作者', '出版社', '出版时间', '价格')
 		for name in self.colnames:
 			self.bookTable.addColumn(name)
 		self.bookTable.addRows(1)
