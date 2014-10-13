@@ -4,6 +4,7 @@ import Tkinter, MySQLdb, datetime
 from tkintertable.TableModels import TableModel
 from tkintertable.Tables import TableCanvas
 
+
 class ManagerUI(object):
 	
 	def __init__(self, top_, manager_):
@@ -15,6 +16,7 @@ class ManagerUI(object):
 		self.initTable()
 		self.quitButton = Tkinter.Button(self.top, text = '退出', command = self.top.quit)
 		self.quitButton.pack()
+		
 		
 	def initComponent(self, ev = None):
 		# 弄个列表来管理？
@@ -62,6 +64,7 @@ class ManagerUI(object):
 		self.clearTableButton.pack(side = Tkinter.LEFT)
 		self.bfm.pack()
 	
+	
 	def initTable(self, ev = None):
 		self.tableFrame = Tkinter.Frame(self.top)
 		self.tableFrame.pack(expand = True, fill = Tkinter.BOTH) # 后期修改
@@ -78,6 +81,7 @@ class ManagerUI(object):
 		self.bookTable.addRows(1)
 		self.bookTable.autoResizeColumns()
 		
+		
 	def addBook(self, ev = None):
 		# TODO: 防止 SQL 注入
 		try:
@@ -92,6 +96,7 @@ class ManagerUI(object):
 		except MySQLdb.IntegrityError, err:
 			# TODO 已经存在此书
 			print u'已经存在此书'
+	
 	
 	def getBook(self, ev = None):
 		# TODO: 防止 SQL 注入
@@ -116,10 +121,12 @@ class ManagerUI(object):
 			# TODO 未找到该书
 			print u'未找到该书'
 	
+	
 	def deleteBook(self, ev = None):
 		# TODO: 防止 SQL 注入
 		self.manager.query('delete from book where ISBN = ' + self.ISBN.get())
 		self.manager.commit()
+	
 	
 	def clearTable(self, ev = None):
 		self.ISBN.set('')
@@ -129,9 +136,11 @@ class ManagerUI(object):
 		self.publishtime.set('')
 		self.price.set('')
 		
+		
 def init(top = None, manager = None):
 	managerUI = ManagerUI(top, manager)
 	Tkinter.mainloop()
+
 
 if __name__ == '__main__':
 	init()
